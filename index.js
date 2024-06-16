@@ -239,10 +239,15 @@ const makeRandomMove = () => {
     turnIndicator.textContent = `${isXTurn ? "Player's Turn" : "CPU's Turn"}`;
 };
 
-boardSizeSelector.addEventListener('change', (e) => {
+boardSizeSelector.addEventListener('input', (e) => {
     clearTimeout(resetTimeout); 
-    boardSize = parseInt(e.target.value);
-    createBoard(boardSize);
+    let newSize = parseInt(e.target.value);
+    if (newSize >= 3 && newSize <= 10) {
+        boardSize = newSize;
+        createBoard(boardSize);
+    } else {
+        e.target.value = boardSize;
+    }
 });
 
 themeSelector.addEventListener('change', (e) => {
